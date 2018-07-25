@@ -7,7 +7,7 @@ import {
   Image
 } from 'react-native';
 import { connect } from 'react-redux';
-import img_home from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/home_icon.png';
+import img_home from '../images/home_icon.png';
 
 class HeaderDevices extends Component {
     render() {
@@ -23,9 +23,9 @@ class HeaderDevices extends Component {
             </TouchableOpacity>
             <Text style = { styles.txtContentStyle }> LIST OF DEVICES </Text>
             <TouchableOpacity
-              onPress = { () => this.props.dispatch({ type: 'CONTROL_TAB'})}
+              onPress = { () => this.props.dispatch({ type: 'SHOW_DIALOG_CONTROL'})}
             >
-              <Text > NEXT </Text>
+              <Text > OPEN </Text>
             </TouchableOpacity>
         </View>
       );

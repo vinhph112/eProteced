@@ -5,6 +5,8 @@ import HomeDevices from './ListDevices/HomeDevices';
 import HomeControl from './ControlDevice/HomeControl';
 import HomeSetting from './Setting/HomeSetting';
 
+import Second from './BLEFunction/scanBLE';
+
 import TabNavigator from 'react-native-tab-navigator';
 
 import { connect } from 'react-redux';
@@ -16,15 +18,13 @@ class Main extends Component {
       selectedTab: 'home'
     }
   }
-
   setTabCurrent(tabCurrent) {
     this.props.dispatch({ type: tabCurrent});
   }
   render() {
-    const { tabCurrent } = this.props;
     return(
       <TabNavigator
-        tabBarStyle={{ height: 0, overflow: 'hidden' }}
+        tabBarStyle={{ height: 40, overflow: 'hidden' }}
         sceneStyle={{ paddingBottom: 0 }}
       >
         <TabNavigator.Item

@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import img_locked from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/locked_icon.png';
-import img_unlocked from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/unlocked_icon.png';
+import img_locked from '../images/locked_icon.png';
+import img_unlocked from '../images/unlocked_icon.png';
 
 class LockDevice extends Component {
     render() {

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import img_find from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/find_icon.png';
+import img_find from '../images/find_icon.png';
 
 class FindDevice extends Component {
     render() {

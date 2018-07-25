@@ -12,7 +12,7 @@ import PulseAnimate from './PulseAnimate';
 import * as Animatable from 'react-native-animatable';
 
 
-import img_ble from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/ble_icon.png';
+import img_ble from '../images/ble_icon.png';
 
 import { connect } from 'react-redux';
 

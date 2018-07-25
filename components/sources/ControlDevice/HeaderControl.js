@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import img_ble_dis from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/ble_disconnect_icon.png';
-import img_setting from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/setting_icon.png';
+import img_ble_dis from '../images/ble_disconnect_icon.png';
+import img_setting from '../images/setting_icon.png';
 
 
 class HeaderControl extends Component {

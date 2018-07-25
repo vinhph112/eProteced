@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 import Device from './Device';
 import HeaderDevices from './HeaderDevices';
+import DialogControl from './DialogControl';
 
 class HomeDevices extends Component {
   render() {
@@ -18,8 +19,9 @@ class HomeDevices extends Component {
         <FlatList
           data = { this.props.myBLEs}
           renderItem = {({item}) => <Device myBLE = {item} />}
-          keyExtractor = { item => item.id}
+          keyExtractor = { (item) => item.id.toString()}
         />
+        <DialogControl />
       </View>
     );
   }

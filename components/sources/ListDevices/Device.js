@@ -8,30 +8,17 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import img_ble from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/bluetooth.png';
-
-import DialogInput from 'react-native-dialog-input';
-
-
+import img_ble from '../images/bluetooth.png';
 
 class Device extends Component {
 
-  constructor(props){
-  super(props);
-    this.state = {
-      isDialogVisible: false,
-    }
-  }
-  showDialog(isShow){
-    this.setState({isDialogVisible: isShow});
-  }
   render() {
     const { name, mac } = this.props.myBLE;
     return(
       <View>
           <TouchableOpacity
             style = {styles.btnStyle}
-            onPress={()=>{this.showDialog(true)}}
+            onPress={()=> console.log("Press "+ {name} )}
           >
             <Image
                 style={ styles.imgStyle }
@@ -42,14 +29,6 @@ class Device extends Component {
               <Text> {'MAC: '+mac} </Text>
             </View>
           </TouchableOpacity>
-          <DialogInput isDialogVisible={this.state.isDialogVisible}
-              title={"Login control"}
-              message={"Access device with password"}
-              textInputProps = {{secureTextEntry: true}}
-              hintInput ={"password"}
-              submitInput={ (inputText) => {this.showDialog(false)}}
-              closeDialog={ () => {this.showDialog(false)}}>
-          </DialogInput>
       </View>
     );
   }
@@ -78,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   txtNameStyle: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'black'
   }
