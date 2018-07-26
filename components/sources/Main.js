@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import HomeScan from './ScanScreen/HomeScan';
 import HomeDevices from './ListDevices/HomeDevices';
 import HomeControl from './ControlDevice/HomeControl';
@@ -12,14 +13,15 @@ import TabNavigator from 'react-native-tab-navigator';
 import { connect } from 'react-redux';
 
 class Main extends Component {
-  constructor() {
-    super()
-    this.state = {
-      selectedTab: 'home'
-    }
-  }
+
   setTabCurrent(tabCurrent) {
     this.props.dispatch({ type: tabCurrent});
+  }
+  scanPeripheral() {
+    console.log("scanPeripheral-------------------");
+  }
+  connectPeripheral(mac_id) {
+    console.log('connectPeripheral-------------------',mac_id);
   }
   render() {
     return(
@@ -31,13 +33,13 @@ class Main extends Component {
           selected={ this.props.mytabCurrent  === 'home'}
           title="Home"
           onPress={() => this.setTabCurrent('HOME_TAB')}>
-          <HomeScan />
+          <HomeScan onScan = { this.scanPeripheral.bind(this)}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={ this.props.mytabCurrent === 'devices'}
           title="Devices"
           onPress={() => this.setTabCurrent('DEVICE_TAB')}>
-          <HomeDevices />
+          <HomeDevices onConnect = { this.connectPeripheral.bind(this)}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={ this.props.mytabCurrent === 'control'}

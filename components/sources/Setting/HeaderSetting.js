@@ -4,13 +4,15 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import img_back from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/back_icon.png';
 import img_refresh from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/refresh_icon.png';
 
+const window = Dimensions.get('window');
 
 class HeaderSetting extends Component {
     render() {
@@ -46,7 +48,7 @@ export default connect(mapStatetoProps)(HeaderSetting);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#4AB6FF',
-    height: 50,
+    height: window.height * 0.075,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around'
@@ -54,7 +56,6 @@ const styles = StyleSheet.create({
   txtContentStyle: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
     alignItems: 'center',
     flex: 1

@@ -4,13 +4,24 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import img_home from '../images/home_icon.png';
 
+const window = Dimensions.get('window');
+
+
 class HeaderDevices extends Component {
-    render() {
+  addingBLE() {
+    this.props.dispatch({
+      type: 'ADD_BLE_TO_ARR',
+      name: 'BLE_PROTECTED',
+      mac: '0123456789',
+    })
+  }
+  render() {
       return(
         <View style = { styles.container}>
             <TouchableOpacity
@@ -23,9 +34,9 @@ class HeaderDevices extends Component {
             </TouchableOpacity>
             <Text style = { styles.txtContentStyle }> LIST OF DEVICES </Text>
             <TouchableOpacity
-              onPress = { () => this.props.dispatch({ type: 'SHOW_DIALOG_CONTROL'})}
+              onPress = { () => this.addingBLE()}
             >
-              <Text > OPEN </Text>
+              <Text > ADD </Text>
             </TouchableOpacity>
         </View>
       );
@@ -38,8 +49,8 @@ export default connect()(HeaderDevices);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#4AB6FF',
-    height: 50,
+    backgroundColor: '#33adff',
+    height: window.height * 0.075,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around'
@@ -47,7 +58,6 @@ const styles = StyleSheet.create({
   txtContentStyle: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
     alignItems: 'center',
     flex: 1

@@ -12,13 +12,18 @@ import img_ble from '../images/bluetooth.png';
 
 class Device extends Component {
 
+
+
   render() {
     const { name, mac } = this.props.myBLE;
     return(
       <View>
           <TouchableOpacity
             style = {styles.btnStyle}
-            onPress={()=> console.log("Press "+ {name} )}
+            onPress={()=> {
+              this.props.onStartScan(mac)
+              console.log('->'+mac);
+            }}
           >
             <Image
                 style={ styles.imgStyle }

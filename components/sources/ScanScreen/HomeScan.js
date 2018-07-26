@@ -30,7 +30,10 @@ class HomeScan extends Component {
     }
     return null;
   }
-
+  startScanBLE() {
+    this.props.dispatch({ type: 'PRESS_SCAN_TRUE'})
+    this.props.onScan()
+  }
   render() {
       let txtTap = this.props.myisTaptoScan ? '' : 'TAP TO SCAN';
       return(
@@ -40,7 +43,7 @@ class HomeScan extends Component {
               { this.getPulseRun() }
               <TouchableOpacity
                 style = {styles.btnBleStyle}
-                onPress = { () =>   this.props.dispatch({ type: 'PRESS_SCAN_TRUE'})}
+                onPress = { () =>  this.startScanBLE() }
               >
                 <Image
                     style={{width: 50, height: 50}}
@@ -58,11 +61,6 @@ class HomeScan extends Component {
             {txtTap}
             </Animatable.Text>
         </View>
-        <TouchableOpacity
-          style = {styles.btnBleStyle}
-          onPress = { () =>   this.props.dispatch({ type: 'DEVICE_TAB'})}
-        >
-        </TouchableOpacity>
         <Animatable.Text
           animation="pulse"
           iterationCount= "infinite"

@@ -4,13 +4,15 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import img_ble_dis from '../images/ble_disconnect_icon.png';
 import img_setting from '../images/setting_icon.png';
 
+const window = Dimensions.get('window');
 
 class HeaderControl extends Component {
     render() {
@@ -48,7 +50,7 @@ export default connect(mapStatetoProps)(HeaderControl);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#4AB6FF',
-    height: 50,
+    height: window.height * 0.075,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around'
@@ -56,7 +58,6 @@ const styles = StyleSheet.create({
   txtContentStyle: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
     alignItems: 'center',
     flex: 1
