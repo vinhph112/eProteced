@@ -15,18 +15,26 @@ import img_setting from '../images/setting_icon.png';
 const window = Dimensions.get('window');
 
 class HeaderControl extends Component {
+    fncDisconnect() {
+      console.log('->onStartDisconnect',this.props.mymac);
+      // this.props.onStartDisconnect( this.props.mymacConnected)
+      // this.props.dispatch({ type: 'HOME_TAB'})
+    }
     render() {
       return(
         <View style = { styles.container}>
             <TouchableOpacity
-              onPress = { () => this.props.dispatch({ type: 'HOME_TAB'})}
+              onPress = { () => {
+                console.log('->onStartDisconnect',this.props.mymac,this.props.myname);
+                this.props.onStartDisconnect()
+              }}
             >
               <Image
                   style={ styles.imgStyleDis }
                   source = {img_ble_dis}
               />
             </TouchableOpacity>
-            <Text style = { styles.txtContentStyle }> {this.props.mynameConnected} </Text>
+            <Text style = { styles.txtContentStyle }> {this.props.mymac} </Text>
             <TouchableOpacity
               onPress = { () => this.props.dispatch({ type: 'SETTING_TAB'})}
             >
@@ -42,7 +50,8 @@ class HeaderControl extends Component {
 
 function mapStatetoProps(state) {
   return {
-    mynameConnected: state.nameConnected
+    mymac: state.mac,
+    myname: state.name
   }
 }
 export default connect(mapStatetoProps)(HeaderControl);

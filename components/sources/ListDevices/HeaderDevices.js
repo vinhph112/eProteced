@@ -14,13 +14,7 @@ const window = Dimensions.get('window');
 
 
 class HeaderDevices extends Component {
-  addingBLE() {
-    this.props.dispatch({
-      type: 'ADD_BLE_TO_ARR',
-      name: 'BLE_PROTECTED',
-      mac: '0123456789',
-    })
-  }
+
   render() {
       return(
         <View style = { styles.container}>
@@ -33,11 +27,6 @@ class HeaderDevices extends Component {
               />
             </TouchableOpacity>
             <Text style = { styles.txtContentStyle }> LIST OF DEVICES </Text>
-            <TouchableOpacity
-              onPress = { () => this.addingBLE()}
-            >
-              <Text > ADD </Text>
-            </TouchableOpacity>
         </View>
       );
     }

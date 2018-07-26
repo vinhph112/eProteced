@@ -19,6 +19,10 @@ class LockDevice extends Component {
             <View style = { styles.container_chil}>
               <TouchableOpacity
                 style = { styles.btnFind}
+                onPress = { () => {
+                  console.log('->onWriteUnLock');
+                  this.props.onWriteLock('1110070103011C')
+                }}
               >
                 <Image
                     style={ styles.imgStyleLock }
@@ -27,6 +31,10 @@ class LockDevice extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style = { styles.btnFind}
+                onPress = { () => {
+                  console.log('->onWriteUnLock');
+                  this.props.onWriteUnLock('1110070103021D')
+                }}
               >
                 <Image
                     style={ styles.imgStyleUnlock }

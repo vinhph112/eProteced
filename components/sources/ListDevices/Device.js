@@ -21,7 +21,7 @@ class Device extends Component {
           <TouchableOpacity
             style = {styles.btnStyle}
             onPress={()=> {
-              this.props.onStartScan(mac)
+              this.props.onStartConnect(mac,name)
               console.log('->'+mac);
             }}
           >

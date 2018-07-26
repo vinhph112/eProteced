@@ -10,12 +10,32 @@ import FindDevice from './FindDevice';
 import LockDevice from './LockDevice';
 
 class HomeControl extends Component {
+
+  callDisconnectPeripheral() {
+    this.props.onDisconnect();
+    console.log('-->onDisconnect');
+  }
+  callWriteFind(data) {
+    console.log('-->onCallWritePeripheral',data);
+    this.props.onWriteDataFind(data)
+  }
+  callWriteLock(data) {
+    console.log('-->onCallLockPeripheral',data);
+    this.props.onWriteDataLock(data)
+  }
+  callWriteUnLock(data) {
+    console.log('-->onCallUnlockPeripheral',data);
+    this.props.onWriteDataUnLock(data)
+  }
   render() {
     return(
       <View style = {styles.container} >
-        <HeaderControl />
-        <FindDevice />
-        <LockDevice />
+        <HeaderControl onStartDisconnect = { this.callDisconnectPeripheral.bind(this)}/>
+        <FindDevice onWriteFind = { this.callWriteFind.bind(this)}/>
+        <LockDevice
+            onWriteLock = { this.callWriteLock.bind(this)}
+            onWriteUnLock = { this.callWriteUnLock.bind(this)}
+        />
       </View>
     );
   }

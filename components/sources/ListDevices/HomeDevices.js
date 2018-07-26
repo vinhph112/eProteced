@@ -13,9 +13,9 @@ import DialogControl from './DialogControl';
 
 class HomeDevices extends Component {
 
-  callConnectPeripheral(mac) {
-    this.props.onConnect(mac)
-    console.log('-->',mac);
+  callConnectPeripheral(mac,name) {
+    this.props.onConnect(mac,name)
+    console.log('-->',mac,name);
   }
   render() {
     return(
@@ -23,7 +23,7 @@ class HomeDevices extends Component {
         <HeaderDevices />
         <FlatList
           data = { this.props.myBLEs}
-          renderItem = {({item}) => <Device myBLE = {item} onStartScan = { this.callConnectPeripheral.bind(this)} />}
+          renderItem = {({item}) => <Device myBLE = {item} onStartConnect = { this.callConnectPeripheral.bind(this)} />}
           keyExtractor = { (item) => item.id.toString()}
         />
         <DialogControl />

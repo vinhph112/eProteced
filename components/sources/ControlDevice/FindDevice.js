@@ -17,6 +17,10 @@ class FindDevice extends Component {
             <Text style = { styles.txtContentStyle }> Find device </Text>
             <TouchableOpacity
               style = { styles.btnFind}
+              onPress = { () => {
+                console.log('->onWriteFind');
+                this.props.onWriteFind('1110070102001A')
+              }}
             >
               <Image
                   style={ styles.imgStyleFind }
