@@ -8,7 +8,7 @@ import {
   Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
-import img_home from '../images/home_icon.png';
+import img_home from '../images/back_icon.png';
 
 const window = Dimensions.get('window');
 

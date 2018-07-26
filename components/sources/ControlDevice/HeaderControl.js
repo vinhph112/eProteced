@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Dimensions
+  Dimensions,
+  Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -15,18 +16,22 @@ import img_setting from '../images/setting_icon.png';
 const window = Dimensions.get('window');
 
 class HeaderControl extends Component {
-    fncDisconnect() {
-      console.log('->onStartDisconnect',this.props.mymac);
-      // this.props.onStartDisconnect( this.props.mymacConnected)
-      // this.props.dispatch({ type: 'HOME_TAB'})
-    }
+
     render() {
       return(
         <View style = { styles.container}>
             <TouchableOpacity
               onPress = { () => {
                 console.log('->onStartDisconnect',this.props.mymac,this.props.myname);
-                this.props.onStartDisconnect()
+                Alert.alert(
+                  'Comfirm',
+                  'Are you sure disconnect?',
+                  [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => this.props.onStartDisconnect()},
+                  ],
+                  { cancelable: false }
+                )
               }}
             >
               <Image
@@ -34,7 +39,7 @@ class HeaderControl extends Component {
                   source = {img_ble_dis}
               />
             </TouchableOpacity>
-            <Text style = { styles.txtContentStyle }> {this.props.mymac} </Text>
+            <Text style = { styles.txtContentStyle }> {this.props.myname} </Text>
             <TouchableOpacity
               onPress = { () => this.props.dispatch({ type: 'SETTING_TAB'})}
             >

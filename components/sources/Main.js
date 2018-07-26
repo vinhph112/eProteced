@@ -25,6 +25,11 @@ class Main extends Component {
 
   constructor() {
     super()
+    this.state = {
+      message: '',
+      peripherals: new Map(),
+
+    }
     this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
     this.handleStopScan = this.handleStopScan.bind(this);
     this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(this);
@@ -50,29 +55,48 @@ class Main extends Component {
     console.log('Scan is stopped');
     this.props.dispatch({ type: 'DEVICE_TAB'})
   }
-//----------------
+  //----------------
   handleDiscoverPeripheral(peripheral) {
-    console.log('[handleDiscoverPeripheral]--Discover Peripheral');
     console.log('[handleDiscoverPeripheral]--Got ble peripheral', peripheral, peripheral.id);
-    this.props.dispatch({
-      type: 'ADD_BLE_TO_ARR',
-      name: peripheral.name,
-      mac: peripheral.id,
-    })
+    var peripherals = this.state.peripherals;
+    if (!peripherals.has(peripheral.id)){
+      console.log('Adding ble peripheral', peripheral);
+      this.props.dispatch({
+        type: 'ADD_BLE_TO_ARR',
+        name: peripheral.name,
+        mac: peripheral.id,
+      })
+      peripherals.set(peripheral.id, peripheral);
+      this.setState({ peripherals })
+    }
   }
   //----------
   handleDisconnectedPeripheral(data) {
     console.log('Disconnected from ' + data.peripheral);
     this.props.dispatch({ type: 'HOME_TAB'})
+    this.setState({ peripherals: new Map() })
   }
   //----------
   handleUpdateValueForCharacteristic(data) {
     console.log('Received data from ' + data.peripheral + ' - characteristic ' + data.characteristic + ' - value: '+ data.value);
+
+    if (data.value[3] === 254 ) {
+      if (data.value[4] === 2) {
+            this.setState({message: 'Finde deveice successfully'})
+      }
+      if (data.value[4] === 3) {
+          if (data.value[5] === 1) {
+            this.setState({message: 'Lock deveice successfully'})
+          }
+          if (data.value[5] === 2) {
+            this.setState({message: 'Unlock deveice successfully'})
+          }
+      }
+    }
     Alert.alert(
-      'Alert',
-      'Success',
+      'Notification',
+      this.state.message,
       [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {text: 'OK', onPress: () => console.log('OK Pressed')},
       ],
       { cancelable: false }
@@ -172,7 +196,7 @@ class Main extends Component {
   render() {
     return(
       <TabNavigator
-        tabBarStyle={{ height: 40, overflow: 'hidden' }}
+        tabBarStyle={{ height: 0, overflow: 'hidden' }}
         sceneStyle={{ paddingBottom: 0 }}
       >
         <TabNavigator.Item
