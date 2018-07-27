@@ -20,11 +20,7 @@ class DialogControl extends Component {
     };
   }
   submitBtnHandle() {
-    if ( this.state.passControl === '0000')
-    {
-      this.props.dispatch({ type: 'CLOSE_DIALOG_CONTROL'});
-      this.setState({passControl: ''})
-    }
+    this.props.onStartLoginControl(this.state.passControl)
   }
   render() {
     return(
@@ -41,6 +37,7 @@ class DialogControl extends Component {
               placeholder = 'password'
               underlineColorAndroid = "transparent"
               secureTextEntry = {true}
+              maxLength = {20}
               onChangeText={(text) => this.setState({passControl: text})}
               value={this.state.passControl}
             />

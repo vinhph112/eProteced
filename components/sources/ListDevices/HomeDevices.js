@@ -15,7 +15,9 @@ class HomeDevices extends Component {
 
   callConnectPeripheral(mac,name) {
     this.props.onConnect(mac,name)
-    console.log('-->',mac,name);
+  }
+  callLoginControl(data) {
+    this.props.onLoginControl(data)
   }
   render() {
     return(
@@ -26,7 +28,7 @@ class HomeDevices extends Component {
           renderItem = {({item}) => <Device myBLE = {item} onStartConnect = { this.callConnectPeripheral.bind(this)} />}
           keyExtractor = { (item) => item.id.toString()}
         />
-        <DialogControl />
+        <DialogControl onStartLoginControl = { this.callLoginControl.bind(this)}/>
       </View>
     );
   }

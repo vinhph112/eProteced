@@ -57,6 +57,8 @@ const reducer = ( state = defaultState, action) => {
     case 'DISCONNECTED_BLE':
       return {
         ...state,
+        isShowDialogControl: false,
+        isShowDialogSetting: false,
         isConnected: false,
         name: '',
         mac: ''

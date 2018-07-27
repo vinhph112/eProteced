@@ -22,7 +22,7 @@ class SetTimeout extends Component {
   render() {
     return(
       <View style = { styles.contentStyle}>
-        <Text style = {styles.txtLabelStyle}>Set password control</Text>
+        <Text style = {styles.txtLabelStyle}>Set timeout connect</Text>
         <View style = { styles.rowFieldBtnStyle }>
           <TextInput
             style = { styles.txtInputStyle}

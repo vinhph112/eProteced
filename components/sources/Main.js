@@ -72,6 +72,8 @@ class Main extends Component {
   handleDisconnectedPeripheral(data) {
     console.log('Disconnected from ' + data.peripheral);
     this.props.dispatch({ type: 'HOME_TAB'})
+    this.props.dispatch({ type: 'DISCONNECTED_BLE'})
+
     this.setState({ peripherals: new Map() })
   }
   //----------receive data notification from ble
@@ -79,6 +81,17 @@ class Main extends Component {
     console.log('Received data from ' + data.peripheral + ' - characteristic ' + data.characteristic + ' - value: '+ data.value);
 
     if (data.value[1] === 16 && data.value[3] === 254 ) {
+      if (data.value[4] === 1) {
+          if (data.value[5] === 1) {
+            this.setState({message: 'Login control successfully'})
+            this.props.dispatch({ type: 'CLOSE_DIALOG_CONTROL'})
+            this.props.dispatch({ type: 'CONTROL_TAB'})
+          }
+          if (data.value[5] === 2) {
+            this.setState({message: 'Login control failed'})
+            this.props.dispatch({ type: 'CLOSE_DIALOG_CONTROL'})
+          }
+      }
       if (data.value[4] === 2) {
             this.setState({message: 'Find deveice successfully'})
       }
@@ -171,6 +184,27 @@ class Main extends Component {
     })
     .catch((error) => {
       console.log('--writeUnLockPheripheral failed ',error);
+    });
+  }
+  //write password login control
+  writeLoginControl(data) {
+    var arrData = [17,16,0,1,1,];
+    const data_send = this.toUTF8Array(data);
+    console.log('writeLoginControl_1',data_send);
+    for (var i = 0; i < data_send.length; i++) {
+      arrData.push(data_send[i]);
+    }
+    arrData[2] = arrData.length + 1;
+    arrData[arrData.length] = this.calCheckSum(arrData);
+
+    console.log('writeLoginControl_2',arrData, this.byteToHexString(arrData));
+
+    BleManager.writeWithoutResponse(this.props.mymac, 'fff0', 'fff5',arrData)
+    .then(() => {
+      console.log('--writeLoginControl successfully: ',arrData);
+    })
+    .catch((error) => {
+      console.log('--writeLoginControl failed ',error);
     });
   }
   //set password login setting
@@ -294,7 +328,7 @@ class Main extends Component {
                     mac: peripheralInfo.id,
                     name: peripheralInfo.name,
                   })
-                  this.props.dispatch({type: 'CONTROL_TAB'})
+                  this.props.dispatch({type: 'SHOW_DIALOG_CONTROL'})
                 }).catch((error) => {
                   console.log('Notification error 4', error);
                 });
@@ -387,7 +421,7 @@ class Main extends Component {
   render() {
     return(
       <TabNavigator
-        tabBarStyle={{ height: 40, overflow: 'hidden' }}
+        tabBarStyle={{ height: 0, overflow: 'hidden' }}
         sceneStyle={{ paddingBottom: 0 }}
       >
         <TabNavigator.Item
@@ -400,7 +434,10 @@ class Main extends Component {
           selected={ this.props.mytabCurrent === 'devices'}
           title="Devices"
           onPress={() => this.setTabCurrent('DEVICE_TAB')}>
-          <HomeDevices onConnect = { this.connectPeripheral.bind(this)}/>
+          <HomeDevices
+            onConnect = { this.connectPeripheral.bind(this)}
+            onLoginControl = { this.writeLoginControl.bind(this)}
+          />
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={ this.props.mytabCurrent === 'control'}
