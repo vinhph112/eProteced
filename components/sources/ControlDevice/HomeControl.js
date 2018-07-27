@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import HeaderControl from './HeaderControl';
 import FindDevice from './FindDevice';
 import LockDevice from './LockDevice';
+import DialogSetting from './DialogSetting';
 
 class HomeControl extends Component {
 
@@ -27,6 +28,9 @@ class HomeControl extends Component {
     console.log('-->onCallUnlockPeripheral',data);
     this.props.onWriteDataUnLock(data)
   }
+  callWriteLoginSetting(data) {
+    this.props.onWriteLoginSetting(data)
+  }
   render() {
     return(
       <View style = {styles.container} >
@@ -36,6 +40,7 @@ class HomeControl extends Component {
             onWriteLock = { this.callWriteLock.bind(this)}
             onWriteUnLock = { this.callWriteUnLock.bind(this)}
         />
+        <DialogSetting onLoginSetting = { this.callWriteLoginSetting.bind(this)}/>
       </View>
     );
   }

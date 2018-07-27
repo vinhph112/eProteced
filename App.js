@@ -30,6 +30,8 @@ const defaultState = {
   name: '',
   mac: '',
   isShowDialogControl: false,
+  isShowDialogSetting: false,
+
 };
 const reducer = ( state = defaultState, action) => {
   switch (action.type) {
@@ -63,6 +65,10 @@ const reducer = ( state = defaultState, action) => {
       return {...state, isShowDialogControl: true};
     case 'CLOSE_DIALOG_CONTROL':
       return {...state, isShowDialogControl: false};
+    case 'SHOW_DIALOG_SETTING':
+      return {...state, isShowDialogSetting: true};
+    case 'CLOSE_DIALOG_SETTING':
+      return {...state, isShowDialogSetting: false};
     case 'ADD_BLE_TO_ARR':
       return {
         ...state,

@@ -10,53 +10,40 @@ import {
 import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 
-class DialogControl extends Component {
+class DialogSetting extends Component {
   constructor(props)
   {
     super(props);
     this.state = {
       checked: false,
-      passControl: ''
+      passSetting: ''
     };
   }
   submitBtnHandle() {
-    if ( this.state.passControl === '0000')
-    {
-      this.props.dispatch({ type: 'CLOSE_DIALOG_CONTROL'});
-      this.setState({passControl: ''})
-    }
+    this.props.onLoginSetting(this.state.passSetting)
   }
   render() {
     return(
       <View style = {styles.container} >
         <Modal
-            isVisible={ this.props.myisShowDialogControl}
+            isVisible={ this.props.myisShowDialogSetting}
             backdropColor={"black"}
             backdropOpacity={0.75}
         >
           <View style ={ styles.modalContent }>
-            <Text style = { styles.titleStyle }>Login control</Text>
+            <Text style = { styles.titleStyle }>Login setting</Text>
             <TextInput
               style = { styles.txtInputStyle}
               placeholder = 'password'
               underlineColorAndroid = "transparent"
               secureTextEntry = {true}
-              onChangeText={(text) => this.setState({passControl: text})}
-              value={this.state.passControl}
+              onChangeText={(text) => this.setState({passSetting: text})}
+              value={this.state.passSetting}
             />
-            <View style={{ flexDirection: 'column'}}>
-              <View style={{ flexDirection: 'row' }}>
-                <CheckBox
-                  value={this.state.checked}
-                  onValueChange={() => this.setState({ checked: !this.state.checked })}
-                />
-                <Text style={{marginTop: 5}}> Remember login control</Text>
-              </View>
-            </View>
             <View style = { styles.rowBtnStyle}>
               <TouchableOpacity
                 style = { styles.btnStyle}
-                onPress = { () => this.props.dispatch({ type: 'CLOSE_DIALOG_CONTROL'})}
+                onPress = { () => this.props.dispatch({ type: 'CLOSE_DIALOG_SETTING'})}
               >
                 <Text style = { styles.txtStyle }> CLOSE</Text>
               </TouchableOpacity>
@@ -76,11 +63,11 @@ class DialogControl extends Component {
 
 function mapStatetoProps(state) {
   return {
-    myisShowDialogControl: state.isShowDialogControl
+    myisShowDialogSetting: state.isShowDialogSetting
   }
 }
 
-export default connect(mapStatetoProps)(DialogControl);
+export default connect(mapStatetoProps)(DialogSetting);
 
 const styles = StyleSheet.create({
   container: {

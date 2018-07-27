@@ -41,7 +41,7 @@ class HeaderControl extends Component {
             </TouchableOpacity>
             <Text style = { styles.txtContentStyle }> {this.props.myname} </Text>
             <TouchableOpacity
-              onPress = { () => this.props.dispatch({ type: 'SETTING_TAB'})}
+              onPress = { () => this.props.dispatch({ type: 'SHOW_DIALOG_SETTING'})}
             >
               <Image
                   style={ styles.imgStyleSet}

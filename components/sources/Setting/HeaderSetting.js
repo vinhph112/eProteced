@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import img_back from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/back_icon.png';
-import img_refresh from 'I:/REACT/BLE5_PROTEC/eProtect/components/images/refresh_icon.png';
+import img_back from '../images/back_icon.png';
+import img_refresh from '..//images/refresh_icon.png';
 
 const window = Dimensions.get('window');
 
