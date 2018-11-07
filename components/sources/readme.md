@@ -1,4 +1,4 @@
-// some components
+# Some components
 1: react-redux
 2: react-native-tab-navigator
 3: react-native-ble-manager
